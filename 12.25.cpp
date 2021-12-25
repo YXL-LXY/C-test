@@ -21,11 +21,11 @@
 
 int main()
 {
-	int count[50] = { 0 },n = 1;
+	int count[50] = { 0 }, n = 1;
 	char ch[500];
 	char* p = ch;
 	gets_s(ch);
-	while (*p!='.')
+	while (*p != '.')
 	{
 		if (*p == ' ')
 			n++;
@@ -35,7 +35,7 @@ int main()
 	int i;
 	for (i = 0; i < n; i++)
 	{
-		while (*p != ' ')
+		while (*p != ' '&&(*p!='.'))
 		{
 			count[i]++;
 			p++;
@@ -43,6 +43,6 @@ int main()
 	}
 	for (i = 0; i < n; i++)
 	{
-		printf("%d",count[i]);
+		printf("%d ", count[i]);
 	}
 }
