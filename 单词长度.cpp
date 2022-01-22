@@ -22,13 +22,13 @@
 int main()
 {
 	int count[50] = { 0 }, n = 1;
-	char ch[500];
+	char ch[500];//存一行文本
 	char* p = ch;
 	gets_s(ch);
 	while (*p != '.')
 	{
 		if (*p == ' ')
-			n++;
+			n++;//计算这行文本有多少单词
 		p++;
 	}
 	p = ch;
@@ -37,7 +37,7 @@ int main()
 	{
 		while (*p != ' '&&(*p!='.'))
 		{
-			count[i]++;
+			count[i]++;//记录单词长度
 			p++;
 		}p++;
 	}
