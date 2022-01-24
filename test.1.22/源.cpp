@@ -138,3 +138,39 @@
 //	}
 //	puts(a);
 //}
+
+
+
+
+
+//
+////数组指针
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int (*p)[10] = &arr;
+//	for (int i = 0; i < 10; i++)
+//	{
+//		printf("%d ", (*p)[i]);
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+//函数指针
+int add(int x, int y)
+{
+	return x + y;
+}
+int main()
+{
+	int (*p)(int, int) = add;
+	//int (*p)(int, int) = &add;//函数名取不取地址一样
+	int ret = (*p)(10, 20);
+	printf("%d",ret);
+	return 0;
+}
