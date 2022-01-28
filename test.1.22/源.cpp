@@ -161,16 +161,27 @@
 
 
 
-//函数指针
-int add(int x, int y)
-{
-	return x + y;
-}
-int main()
-{
-	int (*p)(int, int) = add;
-	//int (*p)(int, int) = &add;//函数名取不取地址一样
-	int ret = (*p)(10, 20);
-	printf("%d",ret);
-	return 0;
-}
+////函数指针
+//int add(int x, int y)
+//{
+//	return x + y;
+//}
+//int main()
+//{
+//	int (*p)(int, int) = add;
+//	//int (*p)(int, int) = &add;//函数名取不取地址一样
+//	int ret = (*p)(10, 20);
+//	printf("%d",ret);
+//	return 0;
+//}
+
+//char* my_strcpy(char* dest , const char* src);
+//写一个函数指针 pf，能够指向my_strcpy
+//char* (*pf)(char* , const char*);
+
+//写一个函数指针数组 pfArr ,能够存放4个my_strcpy函数的地址
+//char* (*pfArr[4])(char* , const char*);
+
+//指向函数指针数组的指针ppfArr
+//char* (*（*ppfArr）[4])(char* , const char*);
+
