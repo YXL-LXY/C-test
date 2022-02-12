@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#include<math.h>
 
 //void reverse(char* str)
 //{
@@ -27,4 +28,34 @@
 
 
 
+//求0-100000的自幂数并打印出来
+int main()
+{
+	int i = 0;
+	for (i = 0; i < 100000; i++)
+	{
+		//确定i是几位数
+		int n = 1;
+		int ret = i;
+		while (ret /= 10)
+		{
+			n++;
+		}
+		ret = i;
+		int sum = 0;
+		while (ret)
+		{
+			sum += pow(ret % 10, n);
+			ret /= 10;
+		}
+		if (sum == i)
+			printf("%d ", i);
+	}
+	return 0;
+}
+
+
+
+
+//喝汽水问题
 
