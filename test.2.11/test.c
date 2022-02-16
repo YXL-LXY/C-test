@@ -157,46 +157,50 @@
 // 要求：时间复杂度小于O(N);
 //
 
-int FindNum(int arr[3][3], int k,int *px,int *py)//比较矩阵右上角数据和要找数据的大小，去掉一行或一列
-{
-	int a = 0;
-	int b = *py - 1;
-	while (a <= *px - 1 && b >= 0)
-	{
-		if (arr[a][b] > k)
-		{
-			b--;//去掉最右边一列
-		}
-		else if (arr[a][b] < k)
-		{
-			a++;//去掉第一行
-		}
-		else
-		{
-			*px = a;
-			*py = b;
-			return 1;
-		}
-	}
-	//找不到
-	return 0;
-}
+//int FindNum(int arr[3][3], int k,int *px,int *py)//比较矩阵右上角数据和要找数据的大小，去掉一行或一列
+//{
+//	int a = 0;
+//	int b = *py - 1;
+//	while (a <= *px - 1 && b >= 0)
+//	{
+//		if (arr[a][b] > k)
+//		{
+//			b--;//去掉最右边一列
+//		}
+//		else if (arr[a][b] < k)
+//		{
+//			a++;//去掉第一行
+//		}
+//		else
+//		{
+//			*px = a;
+//			*py = b;
+//			return 1;
+//		}
+//	}
+//	//找不到
+//	return 0;
+//}
+//
+//int main()
+//{
+//	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
+//	int k = 7;
+//	int x = 3;
+//	int y = 3;
+//	int ret = FindNum(arr, k, &x, &y);
+//	if (ret == 1)
+//	{
+//		printf("找到了\n");
+//		printf("下标是：%d %d",x,y);
+//	}
+//	else
+//	{
+//		printf("找不到");
+//	}
+//	return 0;
+//}
 
-int main()
-{
-	int arr[3][3] = { 1,2,3,4,5,6,7,8,9 };
-	int k = 17;
-	int x = 3;
-	int y = 3;
-	int ret = FindNum(arr, k, &x, &y);
-	if (ret == 1)
-	{
-		printf("找到了\n");
-		printf("下标是：%d %d",x,y);
-	}
-	else
-	{
-		printf("找不到");
-	}
-	return 0;
-}
+
+
+
