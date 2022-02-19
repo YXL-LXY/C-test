@@ -67,7 +67,7 @@
 
 //实现strlen的三种方法
 //1
-//int My_strlen1(char* x)
+//int My_strlen1(const char* x)
 //{
 //	int count = 0;
 //	while (*x)
@@ -82,7 +82,7 @@
 
 
 //2
-//int My_strlen2(char* x)
+//int My_strlen2(const char* x)
 //{
 //	if (*x)
 //		return 0;
@@ -92,21 +92,127 @@
 
 
 //3 指针减指针
-int My_strlen3(char* x)
+//int My_strlen3(const char* x)
+//{
+//	char* q = x;
+//	while (*x)
+//	{
+//		x++;
+//	}
+//	return x - q;
+//}
+//
+//
+//int main()
+//{
+//	char arr[] = "HELLO WORLD!";
+//	int ret = My_strlen3(arr);
+//	printf("%d \n", ret);
+//	return 0;
+//}
+
+
+
+
+//strcmp
+
+//int My_strcmp(const char* str1,const char* str2)
+//{
+//	while (*str1 == *str2)
+//	{
+//		if (*str1 == '\0')
+//		{
+//			return 0;
+//		}
+//		str1++;
+//		str2++;
+//	}
+//
+//	return (*str1 - *str2);
+//}
+//
+//int main()
+//{
+//	char* p1 = "abcdefg";
+//	char* p2 = "qwert";
+//	int ret = My_strcmp(p1, p2);
+//	printf("%d \n",ret);
+//	return 0;
+//
+//}
+
+
+//char* My_strstr(const char* p1, const char* p2)
+//{
+//	assert(p1);
+//	assert(p2);
+//	char* s1 = NULL;
+//	char* s2 = NULL;
+//	char* cur = (char*)p1;
+//	if (*p2 == '\0')
+//	{
+//		return (char*)p1;
+//	}
+//	while (*cur)
+//	{
+//		s1 = cur;
+//		s2 = (char*)p2;
+//		while ((*s1 == *s2) && (*s1) && (*s2))
+//		{
+//			s1++;
+//			s2++;
+//		}
+//		if (*s2 == '\0')
+//		{
+//			return cur;
+//		}
+//		cur++;
+//	}
+//	return NULL;
+//}
+//
+//int main()
+//{
+//	const char* p1 = "abbbcdef";
+//	const char* p2 = "bbc";
+//	char* ret = My_strstr(p1, p2);
+//	if (ret == NULL)
+//	{
+//		printf("字串不存在\n");
+//	}
+//	else
+//	{
+//		printf("%s\n", ret);
+//	}
+//	return 0;
+//}
+
+
+void* My_memcpy(void* dest,const void* src,size_t num)
 {
-	char* q = x;
-	while (*x)
+	void* ret = dest;
+	while (num--)
 	{
-		x++;
+		*(char*)dest = *(char*)src;
+		++(char*)dest;
+		++(char*)src;
 	}
-	return x - q;
+	return ret;
 }
 
+struct S
+{
+	char name[20];
+	int age;
+};
 
 int main()
 {
-	char arr[] = "HELLO WORLD!";
-	int ret = My_strlen3(arr);
-	printf("%d \n", ret);
+	int arr1[] = { 1,2,3,4,5 };
+	int arr2[] = { 0 };
+	My_memcpy(arr2,arr1,sizeof(arr1));
+	struct S arr3[] = { {"张三",20},{"李四",30}};
+	struct S arr4[3] = { 0 };
+	My_memcpy(arr4, arr3, sizeof(arr3));
 	return 0;
 }
