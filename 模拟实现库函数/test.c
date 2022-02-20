@@ -187,32 +187,70 @@
 //	return 0;
 //}
 
+//
+//void* My_memcpy(void* dest,const void* src,size_t num)
+//{
+//	void* ret = dest;
+//	while (num--)
+//	{
+//		*(char*)dest = *(char*)src;
+//		++(char*)dest;
+//		++(char*)src;
+//	}
+//	return ret;
+//}
+//
+//struct S
+//{
+//	char name[20];
+//	int age;
+//};
+//
+//int main()
+//{
+//	int arr1[] = { 1,2,3,4,5 };
+//	int arr2[10] = { 0 };
+//	My_memcpy(arr2,arr1,sizeof(arr1));
+//	struct S arr3[] = { {"张三",20},{"李四",30}};
+//	struct S arr4[3] = { 0 };
+//	My_memcpy(arr4, arr3, sizeof(arr3));
+//	return 0;
+//}
 
-void* My_memcpy(void* dest,const void* src,size_t num)
+
+
+
+
+void* My_memmove(void* dest,const void*src,size_t num)
 {
 	void* ret = dest;
-	while (num--)
+	if (dest < src)//前->后
 	{
-		*(char*)dest = *(char*)src;
-		++(char*)dest;
-		++(char*)src;
+		while (num--)
+		{
+			*(char*)dest = *(char*)src;
+			++(char*)dest;
+			++(char*)src;
+		}
+	}
+	else//后->前
+	{
+		while (num--)
+		{
+			*((char*)dest + num) = *((char*)src + num);
+		}
 	}
 	return ret;
 }
 
-struct S
-{
-	char name[20];
-	int age;
-};
-
 int main()
 {
-	int arr1[] = { 1,2,3,4,5 };
-	int arr2[] = { 0 };
-	My_memcpy(arr2,arr1,sizeof(arr1));
-	struct S arr3[] = { {"张三",20},{"李四",30}};
-	struct S arr4[3] = { 0 };
-	My_memcpy(arr4, arr3, sizeof(arr3));
+	int arr1[] = { 1,2,3,4,5,6,7,8,9,10 };
+	My_memmove(arr1 + 2, arr1, 20);
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		printf("%d ", arr1[i]);
+	}
 	return 0;
 }
