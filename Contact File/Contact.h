@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<errno.h>
 
 //#define MAX 1000
 #define MAX_NAME 20
@@ -19,7 +20,8 @@ enum Option
 	SEARCH,
 	MODIFY,
 	SHOW,
-	SORT
+	SORT,
+	SAVE
 };
 
 typedef struct PeoInfo
@@ -48,3 +50,7 @@ void SearchContact(const struct Contact* ps);//查找
 void ModifyContact(struct Contact* ps);//修改
 void SortContact(struct Contact* ps);//排序
 void DestroyContact(struct Contact* ps);
+void SaveContact(Contact* ps);//保存
+
+	//将通讯录中数据写到文件中
+void LoadContact(Contact* ps);

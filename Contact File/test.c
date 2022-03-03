@@ -1,5 +1,3 @@
-
-
 #include"contact.h"
 void menu()
 {
@@ -7,7 +5,7 @@ void menu()
 	printf("*****     1.add                  2.del      *****\n");
 	printf("*****     3.search               4.modify   *****\n");
 	printf("*****     5.show                 6.sort     *****\n");
-	printf("*******************  0.exit  ********************\n");
+	printf("*****     7.save                 0.exit     *****\n");
 	printf("*************************************************\n");
 
 }
@@ -46,8 +44,12 @@ int main()
 			break;
 		case EXIT:
 			//销毁通讯录，释放动态内存
+			SaveContact(&con);
 			DestroyContact(&con);
 			printf("退出通讯录\n");
+			break;
+		case SAVE:
+			SaveContact(&con);
 			break;
 		default:
 			printf("选择错误\n");
@@ -56,4 +58,3 @@ int main()
 	} while (input);
 	return 0;
 }
-

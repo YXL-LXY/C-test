@@ -1,5 +1,3 @@
-
-
 #include"contact.h"
 void InitContact(struct Contact* ps)
 {
@@ -10,6 +8,32 @@ void InitContact(struct Contact* ps)
 	}
 	ps->size = 0;
 	ps->capacity = DEFAULT_SZ;
+	//把文件中已经存放的信息加载到通讯录中
+	LoadContact(ps);
+}
+//声明函数
+void CheckCapacity(Contact* ps);
+
+
+void LoadContact(Contact* ps)
+{
+	PeoInfo tmp = { 0 };
+	FILE* pfRead = fopen("test.txt", "rb");
+	if (pfRead == NULL)
+	{
+		printf("LoadContact::%s\n", strerror(errno));
+		return;
+	}
+	//读取文件放到通讯录中
+	while (fread(&tmp, sizeof(PeoInfo), 1, pfRead))
+	{
+		CheckCapacity(ps);
+		ps->data[ps->size] = tmp;
+		ps->size++;
+	}
+
+	fclose(pfRead);
+	pfRead = NULL;
 }
 
 void CheckCapacity(Contact* ps)
@@ -70,13 +94,13 @@ void ShowContact(const struct Contact* ps)
 				ps->data[i].sex,
 				ps->data[i].tele,
 				ps->data[i].addr
-				);
+			);
 		}
 	}
 }
 //找到返回下标
 //找不到返回-1
-static int FindByName(const struct Contact* ps,char name[MAX_NAME])
+static int FindByName(const struct Contact* ps, char name[MAX_NAME])
 {
 	int i = 0;
 	for (i = 0; i < ps->size; i++)
@@ -93,7 +117,7 @@ void DelContact(struct Contact* ps)
 {
 	char name[MAX_NAME];
 	printf("请输入要删除人的名字：");
-	scanf("%s",name);
+	scanf("%s", name);
 	//查找
 	int pos = FindByName(ps, name);
 	if (pos == -1)
@@ -135,7 +159,7 @@ void SearchContact(const struct Contact* ps)
 			ps->data[pos].sex,
 			ps->data[pos].tele,
 			ps->data[pos].addr);
-		
+
 	}
 }
 
@@ -167,14 +191,14 @@ void ModifyContact(struct Contact* ps)
 	}
 }
 
-int cmp_name(const void* e1,const void* e2)
+int cmp_name(const void* e1, const void* e2)
 {
 	return strcmp(((struct PeoInfo*)e1)->name, ((struct PeoInfo*)e2)->name);
 }
 
 void SortContact(struct Contact* ps)
 {
-	qsort(ps->data,ps->size,sizeof(ps->data[0]),cmp_name);
+	qsort(ps->data, ps->size, sizeof(ps->data[0]), cmp_name);
 }
 
 
@@ -183,3 +207,24 @@ void DestroyContact(struct Contact* ps)
 	free(ps->data);
 	ps->data = NULL;
 }
+
+void SaveContact(Contact* ps)
+{
+	FILE* pfWrite = fopen("test.txt", "wb");
+	if (pfWrite == NULL)
+	{
+		printf("%s\n", strerror(errno));
+		return ;
+	}
+	//将通讯录中数据写到文件中
+	int i = 0;
+	for (i = 0; i < ps->size; i++)
+	{
+		fwrite(&(ps->data[i]), sizeof(PeoInfo), 1, pfWrite);
+	}
+	fclose(pfWrite);
+	pfWrite = NULL;
+}
+
+
+
