@@ -24,6 +24,9 @@ void SeqListPopFront(SL* ps);//头删
 
 void SeqListInsert(SL* ps,int pos, SQDataType x);//随机插入
 void SeqListErase(SL* ps,int pos);//随机删除
+void SeqListPrint(SL* ps);
+void SeqListDestory(SL* ps);//销毁空间
 
 
-
+int SeqListFind(SL* ps, SQDataType x);//查
+void SeqListModity(SL* ps, int pos, SQDataType x);//改

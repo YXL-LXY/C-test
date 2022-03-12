@@ -7,6 +7,13 @@ void SeqListInit(SL* ps)
 	ps->capacity = 0;//容量
 }
 
+void SeqListDestory(SL* ps)
+{
+	free(ps->a);
+	ps->a = NULL;
+	ps->capacity = ps->size = 0;
+}
+
 void SeqListCheckCapacity(SL* ps)
 {
 	//满了就扩容
@@ -107,4 +114,23 @@ void SeqListPrint(SL* ps)//打印
 		printf("%d ", ps->a[i]);
 	}
 	printf("\n");
+}
+
+int SeqListFind(SL* ps, SQDataType x)
+{
+	for (int i = 0; i < ps->size; ++i)
+	{
+		if (ps->a[i] == x)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+void SeqListModity(SL* ps, int pos, SQDataType x)
+{
+	assert(pos < ps->size);
+	ps->a[pos] = x;
 }
