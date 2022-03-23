@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include<stdio.h>
 
+
+//1.
 //int lcm(int m, int n)
 //{
 //	int r = 0;
@@ -26,6 +28,12 @@
 //}
 
 
+
+
+
+
+
+//2.
 //x y 不能表示的最大数为x*y-x-y
 //int main()
 //{
@@ -35,40 +43,120 @@
 //	return 0;
 //}
 
+
+//暴力算法
+//int main()
+//{
+//	int m, n, i, a, b, p;
+//	scanf("%d %d",&m,&n);
+//	int Max = 0;
+//	for (i = 1; i < 100000; i++)
+//	{
+//		a = i % m;
+//		b = i % n;
+//		p = 0;
+//		while (a <= i)
+//		{
+//			if (a % n == 0)
+//			{
+//				p = 1;
+//				break;
+//			}
+//			a = a + m;
+//		}
+//		while (b <= i)
+//		{
+//			if (b % m == 0)
+//			{
+//				p = 1;
+//				break;
+//			}
+//			b = b + n;
+//		}
+//		if (p == 0)
+//		{
+//			if (i > Max)
+//				Max = i;
+//		}
+//	}
+//	printf("%d", Max);
+//	return 0;
+//}
+
+
+//
+////3.翻硬币
+//
+//char s[1000];
+//char d[1000];
+//
+//int difNum()
+//{
+//	int i = 0;
+//	int counts = 0;
+//	while (s[i] != '\0')
+//	{
+//		if (s[i] != d[i])
+//			counts++;
+//		i++;
+//	}
+//	return counts;
+//}
+//
+//int main()
+//{
+//	scanf("%s", s);
+//	scanf("%s", d);
+//	int p[1000] = {0};
+//	int i = 0, j = 0, sumLen = 0, num = 0, difLen = 0;
+//	while (s[i] != '\0')
+//	{
+//		sumLen++;
+//		if (s[i] != d[i])
+//		{
+//			p[j++] = i;
+//			difLen++;
+//		}
+//		i++;
+//	}
+//	j = 0;
+//	int g = 0;
+//	while (1)
+//	{
+//		for (i = p[j]; i < sumLen - 1; i++)
+//		{
+//			if (s[i] == '*')
+//				s[i] = 'o';
+//			else s[i] = '*';
+//			if (s[i + 1] == '*')
+//				s[i + 1] = 'o';
+//			else s[i + 1] = '*';
+//			num++;
+//			if (difNum() == 0)
+//			{
+//				g = 1;
+//				break;
+//			}
+//			else if (difNum() == difLen - 2)
+//			{
+//				difLen = difLen - 2;
+//				j += 2;
+//				break;
+//			}
+//		}
+//		if (g == 1)
+//			break;
+//	}
+//	printf("%d",num);
+//	return 0;
+//}
+
+
+
 int main()
 {
-	int m, n, i, a, b, p;
-	scanf("%d %d",&m,&n);
-	int Max = 0;
-	for (i = 1; i < 100000; i++)
-	{
-		a = i % m;
-		b = i % n;
-		p = 0;
-		while (a <= i)
-		{
-			if (a % n == 0)
-			{
-				p = 1;
-				break;
-			}
-			a = a + m;
-		}
-		while (b <= i)
-		{
-			if (b % m == 0)
-			{
-				p = 1;
-				break;
-			}
-			b = b + n;
-		}
-		if (p == 0)
-		{
-			if (i > Max)
-				Max = i;
-		}
-	}
-	printf("%d", Max);
+	char s[5] = { 0 };
+	scanf("%s", &s);
+	printf("%s", s);
 	return 0;
 }
