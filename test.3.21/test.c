@@ -152,11 +152,42 @@
 //}
 
 
-
-int main()
-{
-	char s[5] = { 0 };
-	scanf("%s", &s);
-	printf("%s", s);
-	return 0;
-}
+//验证尼科彻斯定理，即：任何一个整数m的立方都可以写成m个连续奇数之和
+// 例如：
+// 1^3=1
+// 2^3=3+5
+// 3^3=7+9+11
+// 4^3=13+15+17+19
+// 
+//int main()
+//{
+//	int m = 0;
+//	while (scanf("%d", &m) != EOF)
+//	{   //n*a1+n*(n-1)/2*d
+//		int i = 1;
+//		int power = m * m * m;
+//		for (i = 1; i < power; i += 2)
+//		{
+//			int a = m * i;
+//			int b = m * (m - 1);
+//			if (a + b == power)
+//				//退出循环此时i就是等差的a1
+//				break;
+//		}
+//		int count = 0;
+//		while (count < m)
+//		{
+//			if (count != m - 1)
+//			{
+//				printf("%d+", i);
+//			}
+//			else
+//			{
+//				printf("%d\n", i);
+//			}
+//			i += 2;
+//			count++;
+//		}
+//	}
+//	return 0;
+//}
