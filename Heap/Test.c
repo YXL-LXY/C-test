@@ -16,24 +16,47 @@ void test()
 // 找最小的前K个，建立K个数的大堆
 void PrintTopK(int* a, int n, int k)
 {
-	Heap hp;
-	HeapCreate(&hp, a, k);//建大堆
+	//Heap hp;
+	//HeapCreate(&hp, a, k);//建大堆
+	//int i = k;
+	//for (i = k; i < n; i++)
+	//{
+	//	if (a[i] < HeapTop(&hp))
+	//	{
+	//		HeapPop(&hp);
+	//		HeapPush(&hp, a[i]);
+	//	}
+	//}
+
+	//for (i = 0; i < k; i++)
+	//{
+	//	printf("%d ", HeapTop(&hp));
+	//	HeapPop(&hp);
+	//}
+	//printf("\n");
+
+
+
+	//建大堆
+	for (int root = (k - 2) / 2; root >= 0; root--)
+	{
+		AdjustDown(a, k, root);
+	}
 	int i = k;
 	for (i = k; i < n; i++)
 	{
-		if (a[i] < HeapTop(&hp))
+		if (a[i] < a[0])
 		{
-			HeapPop(&hp);
-			HeapPush(&hp, a[i]);
+			Swap(&a[i], &a[0]);
+			AdjustDown(a, k, 0);
 		}
 	}
 
 	for (i = 0; i < k; i++)
 	{
-		printf("%d ", HeapTop(&hp));
-		HeapPop(&hp);
+		printf("%d ", a[i]);
 	}
-	printf("\n");
+
 }
 void TestTopk()//找小的
 {
@@ -41,10 +64,35 @@ void TestTopk()//找小的
 	PrintTopK(a, sizeof(a) / sizeof(a[0]), 3);
 }
 
+void Heapsort(int* a, int n)//升序
+{
+	//建大堆
+	for (int root = (n - 2) / 2; root >= 0; root--)
+	{
+		AdjustDown(a, n, root);
+	}
+
+	int i = 1;
+	while (i < n)
+	{
+		Swap(&a[0], &a[n - i]);
+		AdjustDown(a, n - i, 0);
+		++i;
+	}
+}
+
 
 int main()
 {
 	//test();
 	TestTopk();
+	/*int arr[] = { 12,38,45,76,10,5,37,91,26,7,56};
+	int len = sizeof(arr) / sizeof(arr[0]);
+	Heapsort(arr,len);
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", arr[i]);
+	}*/
+
 	return 0;
 }
