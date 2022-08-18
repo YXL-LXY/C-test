@@ -43,10 +43,52 @@ int BinaryTreeLeafSize(BTNode* root)
 	return BinaryTreeLeafSize(root->left) + BinaryTreeLeafSize(root->right);
 }
 
+int TreeHeight(BTNode* root)
+{
+	if (root == NULL)
+		return 0;
+
+	int lh = TreeHeight(root->left);
+	int rh = TreeHeight(root->right);
+
+	return lh > rh ? lh + 1 : rh + 1;
+}
+
+
 // 二叉树第k层节点个数
-int BinaryTreeLevelKSize(BTNode* root, int k);
+int BinaryTreeLevelKSize(BTNode* root, int k)
+{
+	assert(k > 0);
+
+	if (root == NULL)
+		return 0;
+
+	if (k == 1)
+		return 1;
+
+	return BinaryTreeLevelKSize(root->left, k - 1) + 
+		   BinaryTreeLevelKSize(root->right, k - 1);
+}
 // 二叉树查找值为x的节点
-BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+{
+	if (root == NULL)
+		return NULL;
+
+	if (root->data == x)
+		return root;
+
+	//先去左树找
+	BTNode* lret = BinaryTreeFind(root->left, x);
+	if (lret)
+		return lret;
+	//左树没找到，再去右树找
+	BTNode* rret = BinaryTreeFind(root->right, x);
+	if (rret)
+		return rret;
+	//都没找到，返回空
+	return NULL;
+}
 // 二叉树前序遍历 
 void BinaryTreePrevOrder(BTNode* root)
 {
@@ -140,5 +182,7 @@ int main()
 
 	printf("%d \n", BinaryTreeSize(root));
 	printf("%d \n", BinaryTreeLeafSize(root));
-
+	
+	printf("%d\n", BinaryTreeLevelKSize(root, 3));
+	printf("%p\n", BinaryTreeFind(root, 'E'));
 }
