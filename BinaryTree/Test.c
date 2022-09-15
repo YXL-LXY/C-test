@@ -2,23 +2,40 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
+#include"Queue.h"
 
-typedef char BTDataType;
 
-typedef struct BinaryTreeNode
-{
-	BTDataType data;
-	struct BinaryTreeNode* left;
-	struct BinaryTreeNode* right;
-}BTNode;
 
 // 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
-BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi)
+BTNode* BinaryTreeCreate(BTDataType* a , int* pi)
 {
-	
+	if (a[*pi] == '#')
+	{
+		(*pi)++;
+		return NULL;
+	}
+
+	BTNode* root = (BTNode*)malloc(sizeof(BTNode));
+	assert(root);
+	root->data = a[*pi];
+	(*pi)++;
+
+	root->left = BinaryTreeCreate(a, pi);
+	root->right = BinaryTreeCreate(a, pi);
+
+	return root;
 }
 // 二叉树销毁
-void BinaryTreeDestory(BTNode** root);
+void BinaryTreeDestory(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	BinaryTreeDestory(root->left);
+	BinaryTreeDestory(root->right);
+	free(root);
+}
 // 二叉树节点个数
 int BinaryTreeSize(BTNode* root)
 {
@@ -130,9 +147,68 @@ void BinaryTreePostOrder(BTNode* root)
 
 }
 // 层序遍历
-void BinaryTreeLevelOrder(BTNode* root);
+void BinaryTreeLevelOrder(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+	if (root)
+		QueuePush(&q, root);
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		printf("%c ", front->data);
+
+		//下一层入队列
+		if (front->left)
+			QueuePush(&q, front->left);
+
+		if (front->right)
+			QueuePush(&q, front->right);
+	}
+	printf("\n");
+
+	QueueDestroy(&q);
+}
 // 判断二叉树是否是完全二叉树
-int BinaryTreeComplete(BTNode* root);
+int BinaryTreeComplete(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+	if (root)
+		QueuePush(&q, root);
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+
+		if (front == NULL)
+		{
+			break;
+		}
+
+		QueuePush(&q, front->left);
+		QueuePush(&q, front->right);
+	}
+
+	// 遇到空以后，后面全是空，则是完全二叉树
+	// 遇到空以后，后面存在非空，则不是完全二叉树
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		if (front != NULL)
+		{
+			QueueDestroy(&q);
+			return false;
+		}
+	}
+
+	QueueDestroy(&q);
+	return true;
+}
 
 
 BTNode* CreateTree()
@@ -176,7 +252,7 @@ BTNode* CreateTree()
 
 int main()
 {
-	BTNode* root = CreateTree();
+	/*BTNode* root = CreateTree();
 	BinaryTreePrevOrder(root);
 	printf("\n");
 
@@ -185,4 +261,18 @@ int main()
 	
 	printf("%d\n", BinaryTreeLevelKSize(root, 3));
 	printf("%p\n", BinaryTreeFind(root, 'E'));
+
+
+	BinaryTreeDestory(root);
+	root = NULL;*/
+
+	BTDataType* a = "ABD##E#H##CF##G##";
+	int pi = 0;
+	BTNode* root = BinaryTreeCreate(a,&pi);
+	//BinaryTreePrevOrder(root);
+	BinaryTreeLevelOrder(root);
+	int ret = BinaryTreeComplete(root);
+	printf("%d ", ret);
+	BinaryTreeDestory(root);
+
 }
